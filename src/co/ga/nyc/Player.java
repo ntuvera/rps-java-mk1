@@ -1,15 +1,49 @@
 package co.ga.nyc;
 
+import java.util.Random;
+import java.util.Scanner;
+
 public abstract class Player {
     private String name;
-    private int currentMove;
-    private int score;
+    private String currentMove;
+    private int wins;
+    private int losses;
 
-    public Player(int currentMove, int score) {
-        this.currentMove = currentMove;
-        this.score = score;
+    public Player() {
     }
 
-    public abstract int throwSymbol();
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public void setLosses(int losses) {
+        this.losses = losses;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCurrentMove() {
+        return currentMove;
+    }
+
+    public void setCurrentMove(String currentMove) {
+        this.currentMove = currentMove;
+    }
+
+    public abstract String chooseMove();
 }
 
