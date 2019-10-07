@@ -12,16 +12,7 @@ import java.util.Scanner;
 public class Game {
     private ArrayList<Player> players;
     private int idNum;
-    private boolean quit;
     private String recordsFile = "records.txt";
-
-    public boolean isQuit() {
-        return quit;
-    }
-
-    public void setQuit(boolean quit) {
-        this.quit = quit;
-    }
 
     private ArrayList<Player> playerList;
 
@@ -135,6 +126,7 @@ public class Game {
             }
         }catch(Exception e){
             System.out.println("Unable to read records, please contact dev");
+            System.out.println(e);
         }finally{
             reader.close();
         }
@@ -146,7 +138,6 @@ public class Game {
 
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(filename, true)));
         String record = player1.getName()+ "," + player1.getCurrentMove() + "," + player2.getName() + "," + player2.getCurrentMove();
-        bufferedWriter.newLine();
         bufferedWriter.write(record);
 
         bufferedWriter.close();
