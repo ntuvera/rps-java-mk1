@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Human extends Player{
+    // TODO: maybe include isWinner for writeToFile method?
 
     public Human(String name) {
         super();

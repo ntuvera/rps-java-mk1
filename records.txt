@@ -17,3 +17,9 @@ The NorthFace,scissors,The SoutHFace,rock,loss
 Marty,paper,McFly,scissors,loss
 Staples,scissors,Bot,paper,win
 Orange,rock,Yellow,paper,loss
+Nate,rock,Bot,rock,draw
+Nate,rock,Bot,paper,loss
+Nate,rock,Bot,rock,draw
+Nate,rock,Bot,rock,draw
+Nate,rock,Bot,paper,loss
+Mega Man,rock,Bot,paper,loss
