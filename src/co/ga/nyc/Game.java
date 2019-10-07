@@ -63,8 +63,8 @@ public class Game {
     public static void compareMoves(Player player1, Player player2){
         String player1Move = player1.getCurrentMove();
         String player2Move = player2.getCurrentMove();
-        System.out.println(player1Move);
-        System.out.println(player2Move);
+        System.out.println(player1.getName() + ": " + player1Move);
+        System.out.println(player2.getName() + ": " + player2Move);
 
         if(player1Move.equals(player2Move)){
             System.out.println("It's a Draw");
@@ -83,20 +83,8 @@ public class Game {
         } else {
             System.out.println("something went wrong here....");
         }
-//        return player1;
     }
 
-        // call bot to throw move
-
-        // grab user input
-
-        // compare
-
-        // display results
-
-    // OR
-
-        // grab player 1 input
 
         // grab player 2 input
 
@@ -110,41 +98,55 @@ public class Game {
     // method to read scores from record.txt
 
     public static void readFromFile(String filename) throws IOException {
+        ArrayList<String> recordList = new ArrayList<String>();
+
         String file = filename;
         BufferedReader reader = new BufferedReader(new FileReader(file));
         try{
             String currentLine = reader.readLine();
 
             while (currentLine != null) {
-//                Superhero superhero = new Superhero();
-//                String[] data = currentLine.split(",");
-//                superhero.setSuperheroName(data[0]);
-//                superhero.setSecretIdentity(data[1]);
-//                superhero.setHome(data[2]);
-//                superhero.setDomain(data[3]);
-//                superheroes.add(superhero);
-//                currentLine = reader.readLine();
+                // record format: name,wins,loses
+                String[] data = currentLine.split(",");
+                String result = "";
+//                result += data[0];
+//                result += " picked ";
+//                result += data[1];
+//                result += " and ";
+//                result += data[2];
+//                result += " picked ";
+//                result += data[3];
+//                result += ".";
+
+                result += String.format("%s picked %s and %s picked %s. It was a %s", data[0], data[1], data[2], data[3], data[4] );
+
+                recordList.add(result);
+                currentLine = reader.readLine();
+//                System.out.println(result);
             }
         }finally{
             reader.close();
         }
+        recordList.forEach( record -> System.out.println(record + "\n"));
     }
 
-    public static void writeToFile(String filename) throws IOException {
-        Path path = Paths.get(filename);
-//        byte[] strToBytes = (name + " " +score).getBytes();
+//    public static void writeToFile(String filename, Player player1, Player player2) throws IOException {
+//        Path path = Paths.get(filename);
+////        byte[] strToBytes = (name + " " +score).getBytes();
+////
+////        Files.write(path, strToBytes);
+////
+////        String read = Files.readAllLines(path).get(0);
+////        return read;
 //
-//        Files.write(path, strToBytes);
+//        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(filename)));
+////        bufferedWriter.write("test");
+//        String record = player1.getName()+ "," + player1.getCurrentMove() + "," + player2.getName() + "," + player2.currentMove();
+//        bufferedWriter.write("Test");
 //
-//        String read = Files.readAllLines(path).get(0);
-//        return read;
-
-        BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(filename)));
-        bufferedWriter.write("test");
-
-        bufferedWriter.close();
-        return;
-    }
+//        bufferedWriter.close();
+//        return;
+//    }
 
 
 }

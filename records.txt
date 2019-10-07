@@ -1,0 +1,2 @@
+Player1,rock,Computer,scissors,win
+Player1,scissors,Player2,scissors,draw

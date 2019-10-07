@@ -24,28 +24,31 @@ public class Human extends Player{
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Please choose a move: \n");
-        System.out.println("Press 1. to choose \"Rock\" \n");
-        System.out.println("Press 2. to choose \"Paper\" \n");
-        System.out.println("Press 3. to choose \"Scissors\" \n");
-        System.out.println("Press 4. to choose get a random Choice\n");
+        System.out.println("Type 'rock' to choose Rock");
+        System.out.println("Type 'paper' to choose paper");
+        System.out.println("Type 'scissors' to choose Scissors");
+        System.out.println("Type 'quit' to go back to the main menu");
 
-        int playerChoice;
-        if(sc.hasNextInt()){
-           playerChoice = sc.nextInt();
-        } else {
-            playerChoice = 0;
-        }
+        String playerChoice;
+//        if(sc.hasNextInt()){
+//           playerChoice = sc.nextInt();
+//        } else {
+//            playerChoice = 0;
+//        }
+        playerChoice = sc.nextLine().toLowerCase();
 
         switch(playerChoice){
-            case 1:
+            case "rock":
                 this.setCurrentMove("rock");
                 return "rock";
-            case 2:
+            case "paper":
                 this.setCurrentMove("paper");
                 return "paper";
-            case 3:
+            case "scissors":
                 this.setCurrentMove("scissors");
                 return "scissors";
+            case "quit":
+                return "none";
             default:
                 System.out.println("No input recorded, please try again");
 //                chooseMove();
