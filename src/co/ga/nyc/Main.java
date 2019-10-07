@@ -1,8 +1,6 @@
 package co.ga.nyc;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Main {
     private static boolean quit = false;
@@ -14,7 +12,7 @@ public class Main {
         System.out.println("================== Rock Paper Scissors ==================");
         System.out.println("=========================================================");
 
-           game.printMenu();
+       game.printMenu();
     }
 
 }

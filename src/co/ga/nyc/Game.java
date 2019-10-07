@@ -2,22 +2,24 @@ package co.ga.nyc;
 
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Game {
-    private ArrayList<Player> players;
+    private static ArrayList<Player> players;
+    //    private ArrayList<Player> players;
     private String recordsFile = "records.txt";
-    private ArrayList<Player> playerList;
+
+    public Game() { }
 
     public static void printMenu() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         // Welcome and Title
-        System.out.println("Main Menu::\n");
+        System.out.println("Main Menu:\n");
+        System.out.println("=========================================================\n");
         System.out.println("Choose an action:\n");
         System.out.println("1. Type 'play' to play Rock Paper Scissors.\n");
         System.out.println("2. Type 'history' to view your game history.\n");
@@ -27,12 +29,9 @@ public class Game {
 
         Game game = new Game();
 
-//        while(!quit) {
         switch (menuInputInt) {
             case "play":
-
-                ArrayList<Player> players = game.choosePlayers();
-
+                players = game.choosePlayers();
                 players.forEach( (player) -> {
                     String pickedMove = null;
                     try {
@@ -65,8 +64,9 @@ public class Game {
 
 
     public ArrayList<Player> choosePlayers() {
+// TODO: handle exception for invalid response "2"
 
-//        ArrayList<Player> players = new ArrayList<>();
+        players = new ArrayList<>();
         Scanner scanner = new Scanner (System.in);
 
         System.out.println("Will you be playing with 2 players or vs. the computer? ('2 players' or 'vs computer')");
@@ -86,10 +86,8 @@ public class Game {
             player1.setName(nameInput1);
             player2.setName(nameInput2);
 
-            playerList.add(player1);
-            playerList.add(player1);
-//            players.add(player1);
-//            players.add(player2);
+            players.add(player1);
+            players.add(player2);
         } else if (playerResponse.contains("omp")) {
             System.out.println("Human vs Bot detected");
             System.out.println("What's the player's name?");
@@ -102,17 +100,17 @@ public class Game {
             players.add(bot);
         } else {
             System.out.println("Sorry, I didn't quite catch that, try '2 players' or 'vs computer'.");
+            // TODO: clear previous sets if any and re-run asking
             // print player select again
         }
         return players;
 
     }
     // Method to compare moves thrown
-    // TODO: DRY this out... needs it badly
     public void compareMoves(Player player1, Player player2) throws IOException {
         String player1Move = player1.getCurrentMove();
         String player2Move = player2.getCurrentMove();
-
+// TODO: DRY this out... needs it badly
         if(player1Move.equals(player2Move)){
             System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
             System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
@@ -129,7 +127,7 @@ public class Game {
             System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
             System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Paper Wraps around Rock");
-            System.out.println(player1.getName() + " beats " + player2.getName());
+            System.out.println(player2.getName() + " beats " + player1.getName());
             player1.setLosses(player1.getLosses()+1);
             writeToFile(recordsFile, player1, player2,"loss");
         } else if(player1Move.equals("scissors") && player2Move.equals("rock")) {
@@ -174,7 +172,7 @@ public class Game {
     }
 
 
-    public static void displayResults(ArrayList<Player> players){
+    public static void userStats(ArrayList<Player> players){
         System.out.println("Finally Tall\n");
         players.forEach( player -> {
             String resultString = String.format("%s went %d - %d", player.getName(), player.getWins(), player.getLosses());
@@ -182,7 +180,7 @@ public class Game {
         });
 
     }
-
+// TODO: consider exercising ArrayList recordList for read AND write
     public void readFromFile(String filename) throws IOException {
         ArrayList<String> recordList = new ArrayList<String>();
 
@@ -195,8 +193,11 @@ public class Game {
                 // record format: name,wins,loses
                 String[] data = currentLine.split(",");
                 String result = "";
-
-                result += String.format("%s picked %s and %s picked %s. It was a %s", data[0], data[1], data[2], data[3], data[4]);
+                try {
+                    result += String.format("%s picked %s and %s picked %s. It was a %s", data[0], data[1], data[2], data[3], data[4]);
+                } catch(Exception e){
+                    result = "invalid record on file";
+                }
 
                 recordList.add(result);
                 currentLine = reader.readLine();

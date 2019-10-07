@@ -5,5 +5,12 @@ David,scissors,Bot,scissors,draw
 Nate,rock,Bot,scissors,win
 Shaftway,paper,Bot,paper,draw
 Unifor,rock,Bot,paper,loss
-
 BotBot,scissors,Bot,paper,win
+Nate,rock,Joy,paper,loss
+Joy,scissors,Nate,paper,win
+Joy,rock,Nate,rock,draw
+Nate,rock,Boulanger,paper,loss
+Ann,scissors,Bot,paper,win
+
+NateBot,paper,Bot,rock,win
+The NorthFace,scissors,The SoutHFace,rock,loss
