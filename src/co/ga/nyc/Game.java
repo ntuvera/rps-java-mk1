@@ -1,6 +1,5 @@
 package co.ga.nyc;
 
-import com.sun.xml.internal.ws.api.model.wsdl.WSDLOutput;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -11,10 +10,9 @@ import java.util.Scanner;
 
 public class Game {
     private ArrayList<Player> players;
-    private int idNum;
     private String recordsFile = "records.txt";
-
     private ArrayList<Player> playerList;
+
     public static void printMenu() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
@@ -49,6 +47,7 @@ public class Game {
                 break;
             case "history":
                 System.out.println("View Previous Records");
+                System.out.println("=====================");
                 game.readFromFile("records.txt");
                 printMenu();
                 break;
@@ -61,14 +60,13 @@ public class Game {
                 printMenu();
                 break;
         }
-//        }
         scanner.close();
     }
 
 
-    public static ArrayList<Player> choosePlayers() {
+    public ArrayList<Player> choosePlayers() {
 
-        ArrayList<Player> players = new ArrayList<Player>();
+//        ArrayList<Player> players = new ArrayList<>();
         Scanner scanner = new Scanner (System.in);
 
         System.out.println("Will you be playing with 2 players or vs. the computer? ('2 players' or 'vs computer')");
@@ -78,8 +76,8 @@ public class Game {
         // method to start game
 
         if (playerResponse.contains("pl")) {
-            System.out.println("human vs human detected");
-            System.out.println("What is Player 1's name");
+            System.out.println("Human vs Human detected");
+            System.out.println("What is Player 1's name?");
             String nameInput1 = scanner.nextLine();
             System.out.println("What is Player 2's name?");
             String nameInput2 = scanner.nextLine();
@@ -88,10 +86,12 @@ public class Game {
             player1.setName(nameInput1);
             player2.setName(nameInput2);
 
-            players.add(player1);
-            players.add(player2);
+            playerList.add(player1);
+            playerList.add(player1);
+//            players.add(player1);
+//            players.add(player2);
         } else if (playerResponse.contains("omp")) {
-            System.out.println("human vs bot detected");
+            System.out.println("Human vs Bot detected");
             System.out.println("What's the player's name?");
             String nameInput = scanner.nextLine();
             Player player = new Human(nameInput);
@@ -108,46 +108,69 @@ public class Game {
 
     }
     // Method to compare moves thrown
+    // TODO: DRY this out... needs it badly
     public void compareMoves(Player player1, Player player2) throws IOException {
         String player1Move = player1.getCurrentMove();
         String player2Move = player2.getCurrentMove();
 
         if(player1Move.equals(player2Move)){
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("It's a Draw");
             writeToFile(recordsFile, player1, player2,"draw");
         } else if(player1Move.equals("rock") && player2Move.equals("scissors")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Rock Smashes Scissors");
             System.out.println(player1.getName() + " beats " + player2.getName());
             player1.setWins(player1.getWins()+1);
             writeToFile(recordsFile, player1, player2, "win");
         } else if(player1Move.equals("rock") && player2Move.equals("paper")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Paper Wraps around Rock");
             System.out.println(player1.getName() + " beats " + player2.getName());
             player1.setLosses(player1.getLosses()+1);
             writeToFile(recordsFile, player1, player2,"loss");
         } else if(player1Move.equals("scissors") && player2Move.equals("rock")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Rock smashes Scissors");
             System.out.println(player2.getName() + " beats " + player1.getName());
             player1.setLosses(player1.getLosses()+1);
             writeToFile(recordsFile, player1, player2, "loss");
         } else if(player1Move.equals("scissors") && player2Move.equals("paper")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Scissors cuts Paper");
             System.out.println(player1.getName() + " beats " + player2.getName());
             player1.setWins(player1.getWins()+1);
             writeToFile(recordsFile, player1, player2, "win");
         } else if(player1Move.equals("paper") && player2Move.equals("rock")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Paper wraps Rock");
             System.out.println(player1.getName() + " beats " + player2.getName());
             player1.setWins(player1.getWins()+1);
             writeToFile(recordsFile, player1, player2, "win");
         } else if(player1Move.equals("paper") && player2Move.equals("scissors")) {
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
             System.out.println("Scissors cuts Paper");
             System.out.println(player1.getName() + " beats " + player2.getName());
             player1.setWins(player1.getWins()+1);
             writeToFile(recordsFile, player1, player2, "loss");
         } else {
-            System.out.println("ran out of cases -- this should not trigger");
+            System.out.println(player1.getName() + " chose " + player1.getCurrentMove());
+            System.out.println(player2.getName() + " chose " + player2.getCurrentMove());
+            System.out.println("Something went terribly wrong, please quit and restart the game:");
         }
+
+        printMenu();
+    }
+    private void determineWinner(ArrayList<Player> playerList){
+        System.out.println("do a thing");
+       return;
     }
 
 
@@ -178,7 +201,7 @@ public class Game {
                 recordList.add(result);
                 currentLine = reader.readLine();
             }
-        }catch(Exception e){
+        }catch(IOException e){
             System.out.println("Unable to read records, please contact dev");
             System.out.println(e);
         }finally{
@@ -192,6 +215,7 @@ public class Game {
 
         BufferedWriter bufferedWriter = new BufferedWriter((new FileWriter(filename, true)));
         String record = player1.getName()+ "," + player1.getCurrentMove() + "," + player2.getName() + "," + player2.getCurrentMove() + "," + result;
+        bufferedWriter.write("\n");
         bufferedWriter.write(record);
 
         bufferedWriter.close();

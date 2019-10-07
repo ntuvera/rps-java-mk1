@@ -3,3 +3,7 @@ Nate,rock,Bot,scissors,win
 Nate,rock,Bot,scissors,win
 David,scissors,Bot,scissors,draw
 Nate,rock,Bot,scissors,win
+Shaftway,paper,Bot,paper,draw
+Unifor,rock,Bot,paper,loss
+
+BotBot,scissors,Bot,paper,win
