@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Human extends Player{
 
-    // how to initialize player with their name
     public Human(String name) {
         super();
     }
@@ -17,7 +16,6 @@ public class Human extends Player{
     }
     @Override
     public String chooseMove() throws IOException {
-//        Scanner sc = scanner;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Please choose a move: \n");
@@ -41,12 +39,14 @@ public class Human extends Player{
                 return "scissors";
             case "quit":
                 System.out.println("What's the rush?  Well thanks for playing anyway");
-                Main.printMenu();
+                Game.printMenu();
             default:
                 System.out.println("No input recorded, please try again");
                 chooseMove();
                 return "null";
         }
+//        System.out.print("\033[H\033[2J"); // attempt ot use clear screen escaped char, N.W.
+//        System.out.flush();
     }
 
         // Hide Inputs using console, not available in IDE console

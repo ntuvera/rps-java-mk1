@@ -14,7 +14,6 @@ public class Bot extends Player{
     @Override
     public String chooseMove() {
         int randomNumberGenerator = (int) Math.floor(Math.random() * 3+1);
-//        return Integer.parseInt(randomNumberGenerator);
 
         switch (randomNumberGenerator){
             case 1:

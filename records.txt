@@ -1,5 +1,5 @@
 player1,rock,player2,rock,draw
 Nate,rock,Bot,scissors,win
 Nate,rock,Bot,scissors,win
-
-David,scissors,Bot,scissors
+David,scissors,Bot,scissors,draw
+Nate,rock,Bot,scissors,win
