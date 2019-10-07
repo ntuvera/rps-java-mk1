@@ -14,3 +14,6 @@ Ann,scissors,Bot,paper,win
 
 NateBot,paper,Bot,rock,win
 The NorthFace,scissors,The SoutHFace,rock,loss
+Marty,paper,McFly,scissors,loss
+Staples,scissors,Bot,paper,win
+Orange,rock,Yellow,paper,loss

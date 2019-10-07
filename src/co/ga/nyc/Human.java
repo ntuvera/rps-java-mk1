@@ -17,8 +17,8 @@ public class Human extends Player{
     @Override
     public String chooseMove() throws IOException {
         Scanner sc = new Scanner(System.in);
-
-        System.out.println("Please choose a move: \n");
+        Console console = System.console(); // possible use only in non IDE console
+        System.out.println(this.getName() + ": Please choose a move: \n");
         System.out.println("Type 'rock' to choose Rock");
         System.out.println("Type 'paper' to choose paper");
         System.out.println("Type 'scissors' to choose Scissors");
@@ -27,7 +27,6 @@ public class Human extends Player{
         String playerChoice;
         playerChoice = sc.nextLine().toLowerCase();
 
-        Console console = System.console();
         if(console == null) {
             switch (playerChoice) {
                 case "rock":

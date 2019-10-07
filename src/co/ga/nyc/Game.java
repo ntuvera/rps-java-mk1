@@ -1,6 +1,5 @@
 package co.ga.nyc;
 
-
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,7 +8,6 @@ import java.util.Scanner;
 
 public class Game {
     private static ArrayList<Player> players;
-    //    private ArrayList<Player> players;
     private String recordsFile = "records.txt";
 
     public Game() { }
@@ -18,12 +16,12 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
 
         // Welcome and Title
-        System.out.println("Main Menu:\n");
-        System.out.println("=========================================================\n");
+        System.out.println("\n");
+        System.out.println("====================  Main Menu  =========================\n");
         System.out.println("Choose an action:\n");
-        System.out.println("1. Type 'play' to play Rock Paper Scissors.\n");
-        System.out.println("2. Type 'history' to view your game history.\n");
-        System.out.println("3. Type 'quit' to stop playing.\n");
+        System.out.println("1. Type 'play' to play 'Rock, Paper, Scissors.'");
+        System.out.println("2. Type 'history' to view your game history.");
+        System.out.println("3. Type 'quit' to stop playing.");
 
         String menuInputInt = scanner.nextLine().toLowerCase();
 
@@ -64,19 +62,14 @@ public class Game {
 
 
     public ArrayList<Player> choosePlayers() {
-// TODO: handle exception for invalid response "2"
-
         players = new ArrayList<>();
         Scanner scanner = new Scanner (System.in);
 
         System.out.println("Will you be playing with 2 players or vs. the computer? ('2 players' or 'vs computer')");
         String playerResponse = scanner.nextLine().toLowerCase();
-
-
-        // method to start game
-
-        if (playerResponse.contains("pl")) {
-            System.out.println("Human vs Human detected");
+// TODO: Validate empty player.name String inputs
+        if (playerResponse.contains("pl")) { // silly linguistic hack
+            System.out.println("Human vs Human Game: detected");
             System.out.println("What is Player 1's name?");
             String nameInput1 = scanner.nextLine();
             System.out.println("What is Player 2's name?");
@@ -88,8 +81,8 @@ public class Game {
 
             players.add(player1);
             players.add(player2);
-        } else if (playerResponse.contains("omp")) {
-            System.out.println("Human vs Bot detected");
+        } else if (playerResponse.contains("mp")) { // silly linguistic hack
+            System.out.println("Human vs Bot Game: detected");
             System.out.println("What's the player's name?");
             String nameInput = scanner.nextLine();
             Player player = new Human(nameInput);
@@ -100,14 +93,14 @@ public class Game {
             players.add(bot);
         } else {
             System.out.println("Sorry, I didn't quite catch that, try '2 players' or 'vs computer'.");
-            // TODO: clear previous sets if any and re-run asking
-            // print player select again
+            choosePlayers();
         }
         return players;
 
     }
     // Method to compare moves thrown
     public void compareMoves(Player player1, Player player2) throws IOException {
+// TODO: Add setTimeout like function for count down with s.out
         String player1Move = player1.getCurrentMove();
         String player2Move = player2.getCurrentMove();
 // TODO: DRY this out... needs it badly
@@ -171,7 +164,8 @@ public class Game {
        return;
     }
 
-
+// TODO: will include function to see current wins/losses for pair of existing players.
+//  Where to include in options?
     public static void userStats(ArrayList<Player> players){
         System.out.println("Finally Tall\n");
         players.forEach( player -> {
