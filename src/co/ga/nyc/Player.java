@@ -1,7 +1,6 @@
 package co.ga.nyc;
 
-import java.util.Random;
-import java.util.Scanner;
+import java.io.IOException;
 
 public abstract class Player {
     private String name;
@@ -44,6 +43,6 @@ public abstract class Player {
         this.currentMove = currentMove;
     }
 
-    public abstract String chooseMove();
+    public abstract String chooseMove() throws IOException;
 }
 

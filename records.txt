@@ -1,2 +1,3 @@
-Player1,rock,Computer,scissors,win
-Player1,scissors,Player2,scissors,draw
+player1,rock,player2,rock,draw
+Nate,rock,Bot,scissors
+Nate,rock,Bot,scissors

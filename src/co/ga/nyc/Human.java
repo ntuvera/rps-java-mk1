@@ -1,25 +1,21 @@
 package co.ga.nyc;
 
-import sun.lwawt.macosx.CSystemTray;
-
-import java.util.Random;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Human extends Player{
-    private String name;
 
     // how to initialize player with their name
     public Human(String name) {
         super();
-        this.name = name;
     }
 
     @Override
     public String toString(){
-        return "Player name: " + this.name + " - " + this.getCurrentMove() + " " + this.getWins() + "/" + this.getLosses();
+        return "Player name: " + this.getName() + " - " + this.getCurrentMove() + " " + this.getWins() + "/" + this.getLosses();
     }
     @Override
-    public String chooseMove() {
+    public String chooseMove() throws IOException {
 //        Scanner sc = scanner;
         Scanner sc = new Scanner(System.in);
 
@@ -48,10 +44,11 @@ public class Human extends Player{
                 this.setCurrentMove("scissors");
                 return "scissors";
             case "quit":
-                return "none";
+                System.out.println("What's the rush?  Well thanks for playing anyway");
+                Main.printMenu();
             default:
                 System.out.println("No input recorded, please try again");
-//                chooseMove();
+                chooseMove();
                 return "null";
         }
     }

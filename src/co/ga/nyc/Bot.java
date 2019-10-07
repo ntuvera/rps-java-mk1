@@ -1,18 +1,14 @@
 package co.ga.nyc;
 
-import java.util.Random;
-import java.util.Scanner;
-
 public class Bot extends Player{
-    private String name = "Bot";
-
     public Bot() {
         super();
+        this.setName("Bot");
     }
 
     @Override
     public String toString(){
-        return "RPS " + this.name +  " " + this.getCurrentMove() + " - " + this.getWins() + "/" + this.getLosses();
+        return "RPS " + this.getName() +  " " + this.getCurrentMove() + " - " + this.getWins() + "/" + this.getLosses();
     }
 
     @Override

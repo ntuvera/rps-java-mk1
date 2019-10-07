@@ -5,11 +5,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
-    // conditional while loop to keep running game until gameOver flag thrown
-    boolean quit = false;
+    private static boolean quit = false;
 
     public static void main(String[] args) throws IOException {
-
+//        Game.writeToFile("records.txt");
         System.out.println("=========================================================");
         System.out.println("================== Rock Paper Scissors ==================");
         System.out.println("=========================================================");
@@ -33,27 +32,32 @@ public class Main {
 
         Game game = new Game();
 
-//        while(!game.isQuit()) {
+//        while(!quit) {
             switch (menuInputInt) {
                 case "play":
 
                     ArrayList<Player> players = game.choosePlayers();
 
                     players.forEach( (player) -> {
-                        String pickedMove = player.chooseMove();
+                        String pickedMove = null;
+                        try {
+                            pickedMove = player.chooseMove();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         player.setCurrentMove(pickedMove);
                     });
 
                     game.compareMoves(players.get(0), players.get(1));
-                    game.displayResults();
-
                     break;
                 case "history":
                     System.out.println("View Previous Records");
                     game.readFromFile("records.txt");
+                    printMenu();
                     break;
                 case "quit":
                     System.out.println("Thanks for playing");
+                    quit = true;
                     System.exit(0);
                     break;
                 default:
